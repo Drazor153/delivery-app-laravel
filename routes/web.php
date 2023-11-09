@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Dashboard;
+use App\Http\Controllers\OrdersApi;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +16,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/dashboard');
 });
+
+Route::get('/dashboard', [Dashboard::class, 'index']);
+
+Route::get('/api/orders', [OrdersApi::class, 'paginatedOrders']);
