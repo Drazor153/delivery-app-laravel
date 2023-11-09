@@ -10,5 +10,6 @@ class CartModel extends Model
     use HasFactory;
 
     protected $table = 'carro';
+    public $timestamps = false;
 
 }

@@ -19,11 +19,11 @@ return new class extends Migration
             $table->string('direccion', 45);
             $table->string('rut', 10);
             $table->string('password', 64);
-            $table->integer('saldo');
+            $table->integer('saldo')->default(0);
 
             $table->integer('carro_activo')->nullable();
 
-            $table->timestamps();
+            // $table->timestamps();
             // $table->timestamp('email_verified_at')->nullable();
             // $table->rememberToken();
         });
@@ -32,7 +32,8 @@ return new class extends Migration
             $table->string('email', 45)->primary();
             $table->string('nombre', 25);
             $table->string('password', 64);
-            $table->timestamps();
+
+            // $table->timestamps();
 
         });
     }

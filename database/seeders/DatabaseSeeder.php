@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
         // ]);
         
         $this->call(ProductoSeeder::class);
-        $this->call(AdminSeeder::class);
+        $this->call(UsuarioSeeder::class);
 
     }
 }

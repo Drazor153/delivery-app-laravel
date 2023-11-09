@@ -19,12 +19,12 @@
         {{-- Set currency format --}}
         @foreach ($ordersRes as $order)
           <tr class="border-b border-slate-400 bg-slate-200 hover:bg-slate-300">
-            <th scope="row" class="px-3 py-3">{{ $order['id'] }}</th>
-            <td class="px-6 py-3">{{ $order['customer'] }}</td>
-            <td class="px-6 py-3">{{ $order['status'] }}</td>
+            <th scope="row" class="px-3 py-3">{{ $order->id }}</th>
+            <td class="px-6 py-3">{{ $order->customer }}</td>
+            <td class="px-6 py-3">{{ $order->status }}</td>
 
-            <td class="px-4 py-3">{{ $order['purchaseDate'] }}</td>
-            <td class="px-6 py-3">${{ number_format($order['total'], 0, ',', '.') }}</td>
+            <td class="px-4 py-3">{{ $order->purchaseDate }}</td>
+            <td class="px-6 py-3">${{ number_format($order->total, 0, ',', '.') }}</td>
             <td class="flex justify-center gap-2 py-3">
               <a class="whitespace-nowrap rounded-lg bg-blue-600 px-3 py-1.5 text-white hover:bg-blue-700"
                 href="">Revisar</a>

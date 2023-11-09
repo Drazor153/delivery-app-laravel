@@ -20,5 +20,6 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', [Dashboard::class, 'index']);
+Route::get('/dashboard/all', [Dashboard::class, 'all']);
 
 Route::get('/api/orders', [OrdersApi::class, 'paginatedOrders']);

@@ -15,10 +15,11 @@ return new class extends Migration
             // $table->timestamps();
             $table->id('id_carro');
             $table->string('email_usuario', 45);
-            $table->integer('precio_total');
-            $table->string('fecha_pago');
+            $table->integer('precio_total')->default(0);
+            $table->string('fecha_pago')->nullable();
+            $table->string('estado_delivery', 45)->nullable();
 
-            $table->timestamps();
+            // $table->timestamps();
 
         });
 
@@ -30,7 +31,7 @@ return new class extends Migration
             $table->integer('cantidad');
             $table->integer('precio_linea');
 
-            $table->timestamps();
+            // $table->timestamps();
 
         });
     }

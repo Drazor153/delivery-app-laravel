@@ -10,4 +10,5 @@ class UserModel extends Model
     use HasFactory;
 
     protected $table = 'usuario';
+    public $timestamps = false;
 }

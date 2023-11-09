@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('stock');
             $table->boolean('activo')->default(1);
 
-            $table->timestamps();
+            // $table->timestamps();
 
 
         });
