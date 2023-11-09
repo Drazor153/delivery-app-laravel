@@ -1,0 +1,44 @@
+:root{
+    --dark-bg: rgb(33,33,33);
+}
+/* Animacion modo oscuro */
+.dark-mode {
+    animation-name: anim_d;
+    animation-duration: 0.3s;
+    background-color: var(--dark-bg) ;
+    color: white;
+}
+
+.light-mode {
+    animation-name: anim_l;
+    animation-duration: 0.3s;
+    background-color: white;
+    color: black;
+}
+@keyframes anim_l{
+    from {background-color: var(--dark-bg);
+        color: white;}
+    to {background-color: white;
+        color: black;}
+}
+@keyframes anim_d{
+    from {background-color: white;
+        color: black;}
+    to {background-color: var(--dark-bg);
+        color: white;}
+}
+
+.dark-mode-s {
+    background-color: var(--dark-bg);
+    color: white;
+
+}
+.light-mode-s {
+    background-color: white;
+    color: black;
+}
+a img{
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+}
