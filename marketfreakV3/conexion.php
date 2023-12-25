@@ -1,8 +1,8 @@
 <?php
     class conexion{
         private $servidor = "localhost";
-        private $usuario = "root";
-        private $password = "";
+        private $usuario = "raiz";
+        private $password = "localhost";
         private $baseDatos = "marketfreak";
         private $conexion;
 
