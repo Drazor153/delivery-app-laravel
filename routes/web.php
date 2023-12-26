@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClientApi;
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\OrdersApi;
 use App\Http\Controllers\ProductsApi;
@@ -25,5 +26,5 @@ Route::get('/dashboard/all', [Dashboard::class, 'all']);
 
 Route::get('/api/orders', [OrdersApi::class, 'paginatedOrders']);
 
-// Route::get('/api/products', [ProductsApi::class, 'index']);
 Route::resource('/api/products', ProductsApi::class);
+Route::post('/api/login', [ClientApi::class, 'login']);
