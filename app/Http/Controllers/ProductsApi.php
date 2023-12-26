@@ -21,11 +21,7 @@ class ProductsApi extends Controller
         foreach ($products as $product) {
             
             $type = pathinfo($product->imagen, PATHINFO_EXTENSION);
-            // error_log(File::get($path));
-            // $data = file_get_contents($pathimage);
-            error_log($product->imagen);
-            error_log(mb_convert_encoding($product->imagen, 'UTF-8', 'UTF-8'));
-            $data = $storage->get(mb_convert_encoding($product->imagen, 'UTF-8', 'UTF-8'));
+            $data = $storage->get($product->imagen);
             $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
             $product->imagen = $base64;
         }   
@@ -43,9 +39,16 @@ class ProductsApi extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $code)
     {
-        //
+        $product = ProductModel::all()->where('codigo', $code)->first();
+        $storage = Storage::disk('marketfreak');
+        $type = pathinfo($product->imagen, PATHINFO_EXTENSION);
+        $data = $storage->get($product->imagen);
+        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+        $product->imagen = $base64;
+        return $product;
+
     }
 
     /**

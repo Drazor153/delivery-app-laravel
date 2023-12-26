@@ -25,4 +25,5 @@ Route::get('/dashboard/all', [Dashboard::class, 'all']);
 
 Route::get('/api/orders', [OrdersApi::class, 'paginatedOrders']);
 
-Route::get('/api/products', [ProductsApi::class, 'index']);
+// Route::get('/api/products', [ProductsApi::class, 'index']);
+Route::resource('/api/products', ProductsApi::class);
