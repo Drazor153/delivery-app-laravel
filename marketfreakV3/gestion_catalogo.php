@@ -19,6 +19,7 @@
                     $nombre_producto = $producto["nombre"];
                     $codigo = $producto["codigo"];
                     $imagen = $producto["imagen"];
+                    echo "<script>console.log('". $imagen ."')</script>";
                     $precio = $producto["precio"];
             ?>
             <div class="col">

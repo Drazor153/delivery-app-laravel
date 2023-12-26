@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\OrdersApi;
+use App\Http\Controllers\ProductsApi;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,3 +24,5 @@ Route::get('/dashboard', [Dashboard::class, 'index']);
 Route::get('/dashboard/all', [Dashboard::class, 'all']);
 
 Route::get('/api/orders', [OrdersApi::class, 'paginatedOrders']);
+
+Route::get('/api/products', [ProductsApi::class, 'index']);

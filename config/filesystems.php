@@ -43,7 +43,10 @@ return [
             'visibility' => 'public',
             'throw' => false,
         ],
-
+        'marketfreak' => [
+            'driver' => 'local',
+            'root' => base_path('marketfreakV3/images'),
+        ],
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

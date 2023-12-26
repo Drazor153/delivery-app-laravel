@@ -19,6 +19,7 @@ if($_POST){
         if(move_uploaded_file($_FILES["imagen"]["tmp_name"], $dest)){
             echo "<script>alert('Catálogo actualizado!'); window.location.href='gestion_catalogo.php'</script>";
         }
+        echo "<script>alert('Error al subir la imagen!'); window.location.href='gestion_catalogo.php'</script>";
     }
 }
 ?>
