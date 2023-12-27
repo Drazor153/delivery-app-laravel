@@ -13,13 +13,11 @@ class ProductsApi extends Controller
      */
     public function index()
     {   
-        pathinfo('/api/products', PATHINFO_EXTENSION);
         $products = ProductModel::all();
         $storage = Storage::disk('marketfreak');
         // $path = './marketfreakV3/images/';
         // loop through the products and change the image path
         foreach ($products as $product) {
-            
             $type = pathinfo($product->imagen, PATHINFO_EXTENSION);
             $data = $storage->get($product->imagen);
             $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);

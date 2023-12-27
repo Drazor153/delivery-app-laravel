@@ -28,3 +28,5 @@ Route::get('/api/orders', [OrdersApi::class, 'paginatedOrders']);
 
 Route::resource('/api/products', ProductsApi::class);
 Route::post('/api/login', [ClientApi::class, 'login']);
+Route::put('/api/balance', [ClientApi::class, 'updateBalance']);
+Route::get('/api/cart/{email}', [ClientApi::class, 'getCartUser']);

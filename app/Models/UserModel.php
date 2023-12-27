@@ -10,5 +10,7 @@ class UserModel extends Model
     use HasFactory;
 
     protected $table = 'usuario';
+    protected $primaryKey = 'email';
+    protected $keyType = 'string';
     public $timestamps = false;
 }
