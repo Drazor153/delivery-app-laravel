@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CartModel;
 use App\Models\LineProductModel;
 use App\Models\ProductModel;
 use App\Models\UserModel;
@@ -66,5 +67,47 @@ class ClientApi extends Controller
         }
         $success = true;
         return compact('success', 'products_cart');
+    }
+
+    public function addLineProduct(Request $request){
+        $email = $request->input('email');
+        $codigo = $request->input('codigo');
+        $user = UserModel::all()->where('email', $email)->first();
+        error_log('AAAAAAAAA');
+        if($user == null){
+            $success = false;
+            return compact('success');
+        }
+        $active_cart_instance = CartModel::all()->where('id_carro', $user->carro_activo)->first();
+        if($active_cart_instance == null){
+            $response = [
+                'success' => false,
+                'message' => 'No hay un carro activo'
+            ];
+            return $response;
+        }
+
+        $active_cart = $user->carro_activo;
+        $product = ProductModel::all()->where('codigo', $codigo)->first();
+        $line_product = LineProductModel::all()->where('id_carro', $active_cart)->where('codigo_producto', $codigo)->first();
+        if($line_product == null){
+            $line = new LineProductModel();
+            $line->id_carro = $active_cart;
+            $line->codigo_producto = $codigo;
+            $line->cantidad = 1;
+            $line->precio_linea = $product->precio;
+            $line->save();
+        }else{
+            $line_product->cantidad += 1;
+            $line_product->precio_linea = $line_product->cantidad * $product->precio;
+            $line_product->save();
+        }
+        $active_cart_instance->precio_total += $product->precio;
+        $active_cart_instance->save();
+        $data = [
+            'success' => true,
+            'new_balance' => $active_cart_instance->precio_total
+        ];
+        return $data;
     }
 }
