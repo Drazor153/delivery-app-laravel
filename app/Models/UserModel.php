@@ -9,6 +9,8 @@ class UserModel extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['email', 'password', 'nombre', 'apellido', 'telefono', 'direccion', 'rut', 'saldo', 'carro_activo'];
+
     protected $table = 'usuario';
     protected $primaryKey = 'email';
     protected $keyType = 'string';

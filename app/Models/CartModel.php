@@ -9,6 +9,8 @@ class CartModel extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['email_usuario'];
+
     protected $table = 'carro';
     protected $primaryKey = 'id_carro';
     public $timestamps = false;

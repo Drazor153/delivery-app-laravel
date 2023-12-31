@@ -7,6 +7,7 @@ use App\Models\LineProductModel;
 use App\Models\ProductModel;
 use App\Models\UserModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class ClientApi extends Controller
@@ -31,6 +32,41 @@ class ClientApi extends Controller
         return compact('success');
     }
 
+    public function register(Request $request){
+        $email = $request->input('email');
+        $password = $request->input('password');
+        $hpass = hash('sha256', $password);
+        $name = $request->input('name');
+        $lastname = $request->input('lastname');
+        $phone = $request->input('phone');
+        $address = $request->input('address');
+        $rut = $request->input('rut');
+
+        $user = UserModel::all()->where('email', $email)->first();
+        if($user != null){
+            $success = false;
+            return compact('success');
+        }
+        $new_cart = new CartModel([
+            'email_usuario' => $email,
+        ]);
+        $new_cart->save();
+
+        $user = new UserModel([
+            'email' => $email,
+            'password' => $hpass,
+            'nombre' => $name,
+            'apellido' => $lastname,
+            'telefono' => $phone,
+            'direccion' => $address,
+            'rut' => $rut,
+            'carro_activo' => $new_cart->id_carro,
+        ]);
+        $user->save();
+        $success = true;
+        return compact('success', 'user');
+    }
+
     public function updateBalance(Request $request){
         $email = $request->input('email');
         $balance = $request->input('balance');
@@ -53,9 +89,9 @@ class ClientApi extends Controller
             return compact('success');
         }
         $active_cart = $user->carro_activo;
+        $products_cart = DB::table('linea_producto')->where('id_carro', $active_cart)->get();
 
-        $products_cart = LineProductModel::all()->where('id_carro', $active_cart);
-        
+        // $products_cart = LineProductModel::all()->where('id_carro', $active_cart);
         foreach ($products_cart as $product) {
             $product->producto = ProductModel::all(['nombre', 'imagen', 'precio', 'codigo'])->where('codigo', $product->codigo_producto)->first();
             $storage = Storage::disk('marketfreak');
@@ -73,10 +109,12 @@ class ClientApi extends Controller
         $email = $request->input('email');
         $codigo = $request->input('codigo');
         $user = UserModel::all()->where('email', $email)->first();
-        error_log('AAAAAAAAA');
         if($user == null){
-            $success = false;
-            return compact('success');
+            $response = [
+                'success' => false,
+                'message' => 'No existe el usuario'
+            ];
+            return $response;
         }
         $active_cart_instance = CartModel::all()->where('id_carro', $user->carro_activo)->first();
         if($active_cart_instance == null){
