@@ -148,4 +148,17 @@ class ClientApi extends Controller
         ];
         return $data;
     }
+
+    public function purchaseCart(Request $request){
+        $email = $request->input('email');
+        $user = UserModel::all()->where('email', $email)->first();
+        if($user == null){
+            $response = [
+                'success' => false,
+                'message' => 'No existe el usuario'
+            ];
+            return $response;
+        }
+        
+    }
 }
