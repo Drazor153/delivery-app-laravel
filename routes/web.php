@@ -32,3 +32,4 @@ Route::put('/api/balance', [ClientApi::class, 'updateBalance']);
 Route::get('/api/cart/{email}', [ClientApi::class, 'getCartUser']);
 Route::put('/api/cart/line', [ClientApi::class, 'addLineProduct']);
 Route::post('/api/register', [ClientApi::class, 'register']);
+Route::post('/api/cart', [ClientApi::class, 'purchaseCart']);

@@ -159,6 +159,44 @@ class ClientApi extends Controller
             ];
             return $response;
         }
+
+        $active_cart_instance = CartModel::all()->where('id_carro', $user->carro_activo)->first();
+        if($active_cart_instance == null){
+            $response = [
+                'success' => false,
+                'message' => 'No hay un carro activo'
+            ];
+            return $response;
+        }
+
+        $dif = $user->saldo - $active_cart_instance->precio_total;
+        if($dif < 0){
+            $response = [
+                'success' => false,
+                'message' => 'No tienes saldo suficiente'
+            ];
+            return $response;
+        }
+
+        $response = [
+            'success' => true,
+            'new_balance' => $dif,
+        ];
+
+        $active_cart_instance->fecha_pago = date("d/m/Y H:i");
+        $active_cart_instance->estado_delivery = 'Pendiente';
+        $active_cart_instance->save();
+
+        $new_cart = new CartModel([
+            'email_usuario' => $email,
+        ]);
+        $new_cart->save();
+
+        $user->saldo = $dif;
+        $user->carro_activo = $new_cart->id_carro;
+        $user->save();
+
+        return $response;
         
     }
 }
